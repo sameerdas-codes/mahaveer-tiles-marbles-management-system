@@ -1,0 +1,26 @@
+# Local credentials and environment files
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Python environments and generated files
+backend/venv/
+__pycache__/
+*.py[cod]
+*.pyd
+
+# Local databases and uploaded business documents
+*.sqlite3
+*.db
+backend/media/
+backend/staticfiles/
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
