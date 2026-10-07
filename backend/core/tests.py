@@ -27,6 +27,24 @@ from .models import (
 from .services.ocr_service import parse_bill_text
 
 
+class ProductionEntryPointTests(APITestCase):
+    def test_health_endpoint_is_public_and_reports_service_status(self):
+        response = self.client.get("/health/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"status": "ok"})
+
+    def test_frontend_route_serves_built_react_app(self):
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/html")
+        self.assertIn(
+            b"Mahaveer Tiles &amp; Marbles Management",
+            b"".join(response.streaming_content),
+        )
+
+
 class AuthenticatedApiTestCase(APITestCase):
     def setUp(self):
         self.admin_user = get_user_model().objects.create_user(
